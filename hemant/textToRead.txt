@@ -1,0 +1,18 @@
+Rubik cube values are in a array:
+
+# Array Structure:
+    8 | 7 | 6
+    5 | 4 | 3
+    2 | 1 | 0
+
+This array values are the values on the cube face like for front array the color is orange and it have 7 values and all these 7 values are handled by the array of 0-7.
+different array values are user for the Top, front, left, right, back, bottom.
+
+# Opposite colors
+
+(front) Orange ->  Opposite color is  -> Red     (back)
+(top)   Blue   ->  Opposite color is  -> Green   (bottom)
+(left)  Yellow ->  Opposite color is  -> White   (right)
+
+
+
