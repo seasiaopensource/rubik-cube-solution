@@ -5,8 +5,9 @@ Rubik cube values are in a array:
     5 | 4 | 3
     2 | 1 | 0
 
-This array values are the values on the cube face like for front array the color is orange and it have 7 values and all these 7 values are handled by the array of 0-7.
-different array values are user for the Top, front, left, right, back, bottom.
+This array values are the values on the cube face like for front array the color is orange.
+it have 9 values and all these 9 values are handled by the array of 0-8 index.
+different array values are uses for the Top, front, left, right, back, bottom.
 
 # Opposite colors
 
