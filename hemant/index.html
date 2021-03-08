@@ -6,26 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .parent{
+            width: 30%;
+        }
+        .mb-20 {
+            margin-bottom: 20px;
+        }
+        .mb-20 > button:nth-child(2){
+            margin-left: 20px;
+            float: right;
+        }
+    </style>
+    <script src="./cubic.js"></script>
     <script>
-        /*
-           (front) Orange ->  Opposite -> Red     (back)
-           (top)   Blue   ->  Opposite -> Green   (bottom)
-           (left)  Yellow ->  Opposite -> White   (right)
-
-            Array Positions:
-            0 - Front
-            1 - Top
-            2 - Right
-            3 - Back
-            4 - Left
-            5 - Bottom
-
-            Array Structure:
-            8 | 7 | 6
-            5 | 4 | 3
-            2 | 1 | 0
-        */
-
         let cubicValues = [
             ["Orange-0-Front", "Orange-1-Front", "Orange-2-Front", "Orange-3-Front", "Orange-4-Front", "Orange-5-Front", "Orange-6-Front", "Orange-7-Front", "Orange-8-Front"],// orange-front
             ["Blue-0-Top", "Blue-1-Top", "Blue-2-Top", "Blue-3-Top", "Blue-4-Top", "Blue-5-Top", "Blue-6-Top", "Blue-7-Top", "Blue-8-Top"], // blue-top
@@ -35,356 +29,42 @@
             ["Green-0-Bottom", "Green-1-Bottom", "Green-2-Bottom", "Green-3-Bottom", "Green-4-Bottom", "Green-5-Bottom", "Green-6-Bottom", "Green-7-Bottom", "Green-8-Bottom"] //green-bottom
         ];
 
-        // Rotate Front
-        // [comment] : this portion is at the front and move clockwise
-        function rotateFrontClock() {
-            let temp1 = cubicValues[1][0]; // keep the top values index 0
-            let temp2 = cubicValues[1][1]; // keep the top values index 1
-            let temp3 = cubicValues[1][2]; // keep the top values index 2
-
-            cubicValues[1][0] = cubicValues[4][6]; // top 0 index replaced with left 6 index
-            cubicValues[1][1] = cubicValues[4][3]; // top 1 index replaced with left 3 index
-            cubicValues[1][2] = cubicValues[4][0]; // top 2 index replaced with left 0 index
-
-            cubicValues[4][6] = cubicValues[5][8]; // left 6 index replaced with bottom 8 index
-            cubicValues[4][3] = cubicValues[5][7]; // left 3 index replaced with bottom 7 index
-            cubicValues[4][0] = cubicValues[5][6]; // left 4 index replaced with bottom 6 index
-
-            cubicValues[5][8] = cubicValues[2][2]; // bottom 8 index replaced with right 2 index
-            cubicValues[5][7] = cubicValues[2][5]; // bottom 7 index replaced with right 5 index
-            cubicValues[5][6] = cubicValues[2][8]; // bottom 6 index replaced with right 8 index
-
-            cubicValues[2][2] = temp1; // set values for right index 2
-            cubicValues[2][5] = temp2; // set values for right index 5
-            cubicValues[2][8] = temp3; // set values for right index 8
-            console.log({ cubicValues, temp1, temp2, temp3 });
-        }
-
-
-        function rotateFrontAntiClockWise() {
-            let temp1 = cubicValues[1][0]; // keep the top values index 0
-            let temp2 = cubicValues[1][1]; // keep the top values index 1
-            let temp3 = cubicValues[1][2]; // keep the top values index 2
-
-            cubicValues[1][0] = cubicValues[2][2]; // top 0 index replaced with right 2 index
-            cubicValues[1][1] = cubicValues[2][5]; // top 1 index replaced with right 5 index
-            cubicValues[1][2] = cubicValues[2][8]; // top 2 index replaced with right 8 index
-
-            cubicValues[2][2] = cubicValues[5][8]; // right 2 index replaced with bottom 8 index
-            cubicValues[2][5] = cubicValues[5][7]; // right 5 index replaced with bottom 7 index
-            cubicValues[2][8] = cubicValues[5][6]; // right 8 index replaced with bottom 6 index
-
-            cubicValues[5][8] = cubicValues[4][6]; // bottom 8 index replaced with left 6 index
-            cubicValues[5][7] = cubicValues[4][3]; // bottom 7 index replaced with left 3 index
-            cubicValues[5][6] = cubicValues[4][0]; // bottom 6 index replaced with left 0 index
-
-            cubicValues[4][6] = temp1; // set values for left index 6
-            cubicValues[4][3] = temp2; // set values for left index 3
-            cubicValues[4][0] = temp3; // set values for left index 0
-            console.log({ cubicValues, temp1, temp2, temp3 });
-        }
-
-
-        // ROTATE LEFT 
-        function rotateLeftClockWise() {
-            let temp1 = cubicValues[1][2]; // keep the top values index 2
-            let temp2 = cubicValues[1][5]; // keep the top values index 5
-            let temp3 = cubicValues[1][8]; // keep the top values index 8
-
-            cubicValues[1][2] = cubicValues[3][6]; // top 2 index replaced with back 6 index
-            cubicValues[1][5] = cubicValues[3][3]; // top 5 index replaced with back 3 index
-            cubicValues[1][8] = cubicValues[3][0]; // top 8 index replaced with back 0 index
-
-            cubicValues[3][6] = cubicValues[5][2]; // back 6 index replaced with bottom 2 index
-            cubicValues[3][3] = cubicValues[5][5]; // back 3 index replaced with bottom 5 index
-            cubicValues[3][0] = cubicValues[5][8]; // back 0 index replaced with bottom 8 index
-
-            cubicValues[5][2] = cubicValues[0][2];  // bottom 2 index replaced with front 2 index
-            cubicValues[5][5] = cubicValues[0][5];  // bottom 5 index replaced with front 5 index
-            cubicValues[5][8] = cubicValues[0][8];  // bottom 8 index replaced with front 8 index
-
-            cubicValues[0][2] = temp1; // set values for front index 2
-            cubicValues[0][5] = temp2; // set values for front index 5
-            cubicValues[0][8] = temp3; // set values for front index 8
-            console.log({ cubicValues, temp1, temp2, temp3 });
-        }
-
-        function rotateLeftAntiClockWise() {
-            let temp1 = cubicValues[1][2]; // keep the top values index 2
-            let temp2 = cubicValues[1][5]; // keep the top values index 5
-            let temp3 = cubicValues[1][8]; // keep the top values index 8
-
-            cubicValues[1][2] = cubicValues[0][2]; // top 2 index replaced with front 2 index
-            cubicValues[1][5] = cubicValues[0][5]; // top 5 index replaced with front 5 index
-            cubicValues[1][8] = cubicValues[0][8]; // top 8 index replaced with front 8 index
-
-            cubicValues[0][2] = cubicValues[5][2]; // front 2 index replaced with bottom 2 index
-            cubicValues[0][5] = cubicValues[5][5]; // front 5 index replaced with bottom 5 index
-            cubicValues[0][8] = cubicValues[5][8]; // front 8 index replaced with bottom 8 index
-
-            cubicValues[5][2] = cubicValues[3][6]; // bottom 8 index replaced with back 6 index
-            cubicValues[5][5] = cubicValues[3][3]; // bottom 8 index replaced with back 3 index
-            cubicValues[5][8] = cubicValues[3][0]; // bottom 8 index replaced with back 0 index
-
-            cubicValues[3][6] = temp1; // set values for back index 6
-            cubicValues[3][3] = temp2; // set values for back index 3
-            cubicValues[3][0] = temp3; // set values for back index 0
-            console.log({ cubicValues, temp1, temp2, temp3 });
-        }
-
-        // ROTATE RIGHT 
-        function rotateRightClockWise() {
-            let temp1 = cubicValues[1][0]; // keep the top values index 0
-            let temp2 = cubicValues[1][3]; // keep the top values index 3
-            let temp3 = cubicValues[1][6]; // keep the top values index 6
-
-            cubicValues[1][0] = cubicValues[0][0]; // top 0 index replaced with front 0 index
-            cubicValues[1][3] = cubicValues[0][3]; // top 3 index replaced with front 3 index
-            cubicValues[1][6] = cubicValues[0][6]; // top 6 index replaced with front 6 index
-
-            cubicValues[0][0] = cubicValues[5][0]; // front 0 index replaced with bottom 6 index
-            cubicValues[0][3] = cubicValues[5][3]; // front 3 index replaced with bottom 6 index
-            cubicValues[0][6] = cubicValues[5][6]; // front 6 index replaced with bottom 6 index
-
-            cubicValues[5][0] = cubicValues[3][8];  // bottom 0 index replaced with back 8 index
-            cubicValues[5][3] = cubicValues[3][5];  // bottom 3 index replaced with back 5 index
-            cubicValues[5][6] = cubicValues[3][2];  // bottom 6 index replaced with back 2 index
-
-            cubicValues[3][8] = temp1; // set values for back index 8
-            cubicValues[3][5] = temp2; // set values for back index 5
-            cubicValues[3][2] = temp3; // set values for back index 2
-            console.log({ cubicValues, temp1, temp2, temp3 });
-        }
-
-        function rotateRightAntiClockWise() {
-            let temp1 = cubicValues[1][6];  // keep the top values index 6
-            let temp2 = cubicValues[1][3];  // keep the top values index 3
-            let temp3 = cubicValues[1][0];  // keep the top values index 0
-
-            cubicValues[1][6] = cubicValues[3][2]; // top 6 index replaced with back 2 index
-            cubicValues[1][3] = cubicValues[3][5]; // top 3 index replaced with back 5 index
-            cubicValues[1][0] = cubicValues[3][8]; // top 0 index replaced with back 8 index
-
-            cubicValues[3][2] = cubicValues[5][6];// back 3 index replaced with bottom 6 index
-            cubicValues[3][5] = cubicValues[5][3];// back 5 index replaced with bottom 3 index
-            cubicValues[3][8] = cubicValues[5][0];// back 8 index replaced with bottom 0 index
-
-            cubicValues[5][6] = cubicValues[0][6];// bottom 6 index replaced with top 6 index
-            cubicValues[5][3] = cubicValues[0][3];// bottom 3 index replaced with top 3 index
-            cubicValues[5][0] = cubicValues[0][0];// bottom 0 index replaced with top 0 index
-
-            cubicValues[0][6] = temp1; // set values for top index 6
-            cubicValues[0][3] = temp2; // set values for top index 3
-            cubicValues[0][0] = temp3; // set values for top index 0
-            console.log({ cubicValues, temp1, temp2, temp3 });
-        }
-
-        // ROTATE TOP
-        function rotateTopClockWise() {
-            let temp1 = cubicValues[0][8]; // keep the front values index 8 
-            let temp2 = cubicValues[0][7]; // keep the top values index 7
-            let temp3 = cubicValues[0][6]; // keep the top values index 6
-
-            cubicValues[0][8] = cubicValues[2][8]; // front to right
-            cubicValues[0][7] = cubicValues[2][7];
-            cubicValues[0][6] = cubicValues[2][6];
-
-            cubicValues[2][8] = cubicValues[3][8]; // right to back
-            cubicValues[2][7] = cubicValues[3][7];
-            cubicValues[2][6] = cubicValues[3][6];
-
-            cubicValues[3][8] = cubicValues[4][8]; // back to left
-            cubicValues[3][7] = cubicValues[4][7];
-            cubicValues[3][6] = cubicValues[4][6];
-
-            cubicValues[4][8] = temp1; // set values from left
-            cubicValues[4][7] = temp2;
-            cubicValues[4][6] = temp3;
-        }
-
-        function rotateTopAntiClockWise() {
-            let temp1 = cubicValues[0][8]; // front values
-            let temp2 = cubicValues[0][7];
-            let temp3 = cubicValues[0][6];
-
-            cubicValues[0][8] = cubicValues[4][8]; // front to left
-            cubicValues[0][7] = cubicValues[4][7];
-            cubicValues[0][6] = cubicValues[4][6];
-
-            cubicValues[4][8] = cubicValues[3][8]; // left to back
-            cubicValues[4][7] = cubicValues[3][7];
-            cubicValues[4][6] = cubicValues[3][6];
-
-            cubicValues[3][8] = cubicValues[2][8]; // back to right
-            cubicValues[3][7] = cubicValues[2][7];
-            cubicValues[3][6] = cubicValues[2][6];
-
-            cubicValues[2][8] = temp1; // set right
-            cubicValues[2][7] = temp2;
-            cubicValues[2][6] = temp3;
-            console.log({ cubicValues, temp1, temp2, temp3 });
-        }
-
-        // ROTATE BOTTOM
-        function rotateBottomClockWise() {
-            let temp1 = cubicValues[0][2]; // front values
-            let temp2 = cubicValues[0][1];
-            let temp3 = cubicValues[0][0];
-
-            cubicValues[0][2] = cubicValues[4][2]; // front to left
-            cubicValues[0][1] = cubicValues[4][1];
-            cubicValues[0][0] = cubicValues[4][0];
-
-            cubicValues[4][2] = cubicValues[3][2]; // left to back
-            cubicValues[4][1] = cubicValues[3][1];
-            cubicValues[4][0] = cubicValues[3][0];
-
-            cubicValues[3][2] = cubicValues[2][2]; // back to right
-            cubicValues[3][1] = cubicValues[2][1];
-            cubicValues[3][0] = cubicValues[2][0];
-
-            cubicValues[2][2] = temp1; // set right
-            cubicValues[2][1] = temp2;
-            cubicValues[2][0] = temp3;
-            console.log({ cubicValues, temp1, temp2, temp3 });
-        }
-
-
-        function rotateBottomAntiClockWise() {
-            let temp1 = cubicValues[0][2]; // front values
-            let temp2 = cubicValues[0][1];
-            let temp3 = cubicValues[0][0];
-
-            cubicValues[0][2] = cubicValues[2][2]; // front to right
-            cubicValues[0][1] = cubicValues[2][1];
-            cubicValues[0][0] = cubicValues[2][0];
-
-            cubicValues[2][2] = cubicValues[3][2]; // right to back
-            cubicValues[2][1] = cubicValues[3][1];
-            cubicValues[2][0] = cubicValues[3][0];
-
-            cubicValues[3][2] = cubicValues[4][2]; // back to left
-            cubicValues[3][1] = cubicValues[4][1];
-            cubicValues[3][0] = cubicValues[4][0];
-
-            cubicValues[4][2] = temp1; // set left 
-            cubicValues[4][1] = temp2;
-            cubicValues[4][0] = temp3;
-            console.log({ cubicValues, temp1, temp2, temp3 });
-        }
-
-
-        // Rotate Back
-        function rotateBackClockWise() {
-            let temp1 = cubicValues[1][6]; // top values
-            let temp2 = cubicValues[1][7];
-            let temp3 = cubicValues[1][8];
-
-            cubicValues[1][6] = cubicValues[2][0]; // top to right 
-            cubicValues[1][7] = cubicValues[2][3];
-            cubicValues[1][8] = cubicValues[2][6];
-
-            cubicValues[2][0] = cubicValues[5][2]; // right to bottom
-            cubicValues[2][3] = cubicValues[5][1];
-            cubicValues[2][6] = cubicValues[5][0];
-
-            cubicValues[5][2] = cubicValues[4][8]; // bottom to left
-            cubicValues[5][1] = cubicValues[4][5];
-            cubicValues[5][0] = cubicValues[4][2];
-
-            cubicValues[4][8] = temp1; // set left
-            cubicValues[4][5] = temp2;
-            cubicValues[4][2] = temp3;
-            console.log({ cubicValues, temp1, temp2, temp3 });
-        }
-
-        function rotateBackAntiClockWise() {
-            let temp1 = cubicValues[2][0]; // right values
-            let temp2 = cubicValues[2][3];
-            let temp3 = cubicValues[2][6];
-
-            cubicValues[2][0] = cubicValues[1][6]; // right to top
-            cubicValues[2][3] = cubicValues[1][7];
-            cubicValues[2][6] = cubicValues[1][8];
-
-            cubicValues[1][6] = cubicValues[4][8]; // top to left
-            cubicValues[1][7] = cubicValues[4][5];
-            cubicValues[1][8] = cubicValues[4][2];
-
-            cubicValues[4][8] = cubicValues[5][2]; // left to bottom
-            cubicValues[4][5] = cubicValues[5][1];
-            cubicValues[4][2] = cubicValues[5][0];
-
-            cubicValues[5][2] = temp1; // set bottom
-            cubicValues[5][1] = temp2;
-            cubicValues[5][0] = temp3;
-            console.log({ cubicValues, temp1, temp2, temp3 });
-        }
-
+        let moveTo = new SetMoves(cubicValues);
     </script>
 </head>
 
 <body>
-
-    <button onclick="rotateFrontClock()">
-        Rotate Front Clock Wise
-    </button>
-
-    <button onclick="rotateFrontAntiClockWise()">
-        Rotate Front Anti Wise
-    </button>
-
-    <hr />
-
-    <button onclick="rotateBackClockWise()">
-        Rotate Back Clock Wise
-    </button>
-
-    <button onclick="rotateBackAntiClockWise()">
-        Rotate Back Anti Clock Wise
-    </button>
-
-    <hr />
-    <button onclick="rotateLeftClockWise()">
-        Rotate Left Clock Wise
-    </button>
-
-    <button onclick="rotateLeftAntiClockWise()">
-        Rotate Left Anti Clock Wise
-    </button>
-
-    <hr />
-    <button onclick="rotateRightClockWise()">
-        Rotate Right Clock Wise
-    </button>
-
-    <button onclick="rotateRightAntiClockWise()">
-        Rotate Right Anti Clock Wise
-    </button>
-
-    <hr />
-    <button onclick="rotateTopClockWise()">
-        Rotate Top Clock Wise
-    </button>
-
-    <button onclick="rotateTopAntiClockWise()">
-        Rotate Top Anti Clock Wise
-    </button>
-
-    <hr />
-    <button onclick="rotateBottomClockWise()">
-        Rotate Bottom Clock Wise
-    </button>
-
-    <button onclick="rotateBottomAntiClockWise()">
-        Rotate Bottom Anti Clock Wise
-    </button>
-
-
-    <div id="front">
-
+    <div class="parent">
+    <div class="mb-20">
+        <button onclick="moveTo.rotateFrontClock()"> Rotate Front Clock Wise </button>
+        <button onclick="moveTo.rotateFrontAntiClockWise()"> Rotate Front Anti Wise </button>
     </div>
 
+    <div class="mb-20">
+        <button onclick="moveTo.rotateBackClockWise()"> Rotate Back Clock Wise </button>
+        <button onclick="moveTo.rotateBackAntiClockWise()"> Rotate Back Anti Clock Wise </button>
+    </div>
+
+    <div class="mb-20">
+        <button onclick="moveTo.rotateLeftClockWise()"> Rotate Left Clock Wise </button>
+        <button onclick="moveTo.rotateLeftAntiClockWise()"> Rotate Left Anti Clock Wise </button>
+    </div>
+
+    <div class="mb-20">
+        <button onclick="moveTo.rotateRightClockWise()"> Rotate Right Clock Wise </button>
+        <button onclick="moveTo.rotateRightAntiClockWise()"> Rotate Right Anti Clock Wise </button>
+    </div>
+
+    <div class="mb-20">
+        <button onclick="moveTo.rotateTopClockWise()"> Rotate Top Clock Wise </button>
+        <button onclick="moveTo.rotateTopAntiClockWise()"> Rotate Top Anti Clock Wise </button>
+    </div>
+
+    <div class="mb-20">
+        <button onclick="moveTo.rotateBottomClockWise()"> Rotate Bottom Clock Wise </button>
+        <button onclick="moveTo.rotateBottomAntiClockWise()"> Rotate Bottom Anti Clock Wise</button>
+    </div>
+</div>
 </body>
 
 </html>
