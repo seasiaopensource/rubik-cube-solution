@@ -25,6 +25,54 @@ class Cubic {
         this.temp3 = null;
     }
 
+    getCubeSvg = (cubicValues) => {
+        let updatedValues = cubicValues;
+
+        for (i = 0; i <= 5; i++) {
+            for (j = 8; j >= 0; j--) {
+                // console.log(i, 'i', j, 'j', 'inside -- ', { updatedValues });
+                if (updatedValues[i] && updatedValues[i][j]) {
+                    let strItem = updatedValues[i][j];
+                    let splitItems = strItem.split('-');
+
+                    let currentColor = splitItems[0];
+                    let currentIndex = parseInt(splitItems[1]);
+                    let currentId = splitItems[2];
+
+                    let fixedId = 'Front';
+                    if(i == 0){
+                        fixedId = 'Front';
+                    }
+
+                    if(i == 1){
+                        fixedId = 'Top';
+                    }
+
+                    if(i == 2){
+                        fixedId = 'Right';
+                    }
+
+                    if(i == 3){
+                        fixedId = 'Back';
+                    }
+
+                    if(i == 4){
+                        fixedId = 'Left';
+                    }
+
+                    if(i == 5){
+                        fixedId = 'Bottom';
+                    }
+                    
+                    let currentItemById = document.getElementById(fixedId);
+                    let selectedItem = currentItemById.children[currentIndex];
+                    selectedItem.style.backgroundColor = currentColor;
+                    // console.log({ currentColor, currentIndex, currentId });
+                }
+            }
+        }
+    }
+
     getTempValues({ sourceIndex, sourceValues }) {
         this.temp1 = this.cubicValues[sourceIndex][sourceValues[0]];
         this.temp2 = this.cubicValues[sourceIndex][sourceValues[1]];
@@ -35,6 +83,7 @@ class Cubic {
         this.cubicValues[destinationIndex][destinationValues[0]] = this.temp1;
         this.cubicValues[destinationIndex][destinationValues[1]] = this.temp2;
         this.cubicValues[destinationIndex][destinationValues[2]] = this.temp3;
+        this.getCubeSvg(this.cubicValues);
     }
 
     setCubicValues({ destinationIndex, destinationValues, sourceIndex, sourceValues }) {
@@ -49,6 +98,12 @@ class SetMoves extends Cubic {
         super(cubicValues)
     }
 
+    getUpdatedCubicValues = () => {
+        return cubicValues;
+    }
+
+
+
     // Rotate Front
     // [comment] : this portion is at the front and move clockwise
     rotateFrontClock() {
@@ -60,6 +115,7 @@ class SetMoves extends Cubic {
 
         this.setTempValues({ destinationIndex: 2, destinationValues: [2, 5, 8] }); // set temp values to right
         console.log({ cubicValues, temp1: this.temp1, temp2: this.temp2, temp3: this.temp3 });
+   
     }
 
     rotateFrontAntiClockWise() {

@@ -7,64 +7,257 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .parent{
+        .parent {
             width: 30%;
+            margin-top: 20px;
         }
+
         .mb-20 {
             margin-bottom: 20px;
         }
-        .mb-20 > button:nth-child(2){
+
+        .mb-20>button:nth-child(2) {
             margin-left: 20px;
             float: right;
         }
+
+        .index-item {
+            height: 10px;
+            width: 50px;
+            background: red;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 30% 30% 30%;
+            background-color: #f8f8f8f8;
+            padding: 10px;
+            height: 35vH;
+            width: 10vW;
+        }
+
+        .grid-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            text-align: center;
+            width: 55px;
+            padding-top: 10px;
+        }
+
+        div#outer-grid-items {
+            display: grid;
+            grid-template-columns: 30% 30% 30%;
+            background-color: lightcoral;
+            padding: 10px;
+            height: 90vH;
+            width: 40vW;
+        }
+
+        div#Front:after {
+            content: 'Front';
+            height: 0px;
+            margin-top: 1px;
+        }
+
+        div#Top:after {
+            content: 'Top';
+            height: 0px;
+            margin-top: 1px;
+        }
+
+        div#Left:after {
+            content: 'Left';
+            height: 0px;
+            margin-top: 1px;
+        }
+
+        div#Right:after {
+            content: 'Right';
+            height: 0px;
+            margin-top: 1px;
+        }
+
+        div#Bottom:after {
+            content: 'Bottom';
+            height: 0px;
+            margin-top: 1px;
+        }
+
+        div#Back:after {
+            content: 'Back';
+            height: 0px;
+            margin-top: 1px;
+        }
     </style>
     <script src="./cubic.js"></script>
-    <script>
-        let cubicValues = [
-            ["Orange-0-Front", "Orange-1-Front", "Orange-2-Front", "Orange-3-Front", "Orange-4-Front", "Orange-5-Front", "Orange-6-Front", "Orange-7-Front", "Orange-8-Front"],// orange-front
-            ["Blue-0-Top", "Blue-1-Top", "Blue-2-Top", "Blue-3-Top", "Blue-4-Top", "Blue-5-Top", "Blue-6-Top", "Blue-7-Top", "Blue-8-Top"], // blue-top
-            ["White-0-Right", "White-1-Right", "White-2-Right", "White-3-Right", "White-4-Right", "White-5-Right", "White-6-Right", "White-7-Right", "White-8-Right"],// white-right
-            ["Red-0-Back", "Red-1-Back", "Red-2-Back", "Red-3-Back", "Red-4-Back", "Red-5-Back", "Red-6-Back", "Red-7-Back", "Red-8-Back"],// red-black
-            ["Yellow-0-Left", "Yellow-1-Left", "Yellow-2-Left", "Yellow-3-Left", "Yellow-4-Left", "Yellow-5-Left", "Yellow-6-Left", "Yellow-7-Left", "Yellow-8-Left"],// yellow-left
-            ["Green-0-Bottom", "Green-1-Bottom", "Green-2-Bottom", "Green-3-Bottom", "Green-4-Bottom", "Green-5-Bottom", "Green-6-Bottom", "Green-7-Bottom", "Green-8-Bottom"] //green-bottom
-        ];
 
-        let moveTo = new SetMoves(cubicValues);
-    </script>
 </head>
 
 <body>
+    <div id="outer-grid-items">
+        <div class="grid-container" id="Front" title="front">
+            <div class="grid-item">8</div>
+            <div class="grid-item">7</div>
+            <div class="grid-item">6</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">1</div>
+            <div class="grid-item">0</div>
+        </div>
+
+        <div class="grid-container" id="Top" title="top">
+            <div class="grid-item">8</div>
+            <div class="grid-item">7</div>
+            <div class="grid-item">6</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">1</div>
+            <div class="grid-item">0</div>
+        </div>
+
+        <div class="grid-container" id="Left" title="left">
+            <div class="grid-item">8</div>
+            <div class="grid-item">7</div>
+            <div class="grid-item">6</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">1</div>
+            <div class="grid-item">0</div>
+        </div>
+
+
+        <div class="grid-container" id="Right" title="right">
+            <div class="grid-item">8</div>
+            <div class="grid-item">7</div>
+            <div class="grid-item">6</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">1</div>
+            <div class="grid-item">0</div>
+        </div>
+
+        <div class="grid-container" id="Back" title="back">
+            <div class="grid-item">8</div>
+            <div class="grid-item">7</div>
+            <div class="grid-item">6</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">1</div>
+            <div class="grid-item">0</div>
+        </div>
+
+        <div class="grid-container" id="Bottom" title="bottom">
+            <div class="grid-item">8</div>
+            <div class="grid-item">7</div>
+            <div class="grid-item">6</div>
+            <div class="grid-item">5</div>
+            <div class="grid-item">4</div>
+            <div class="grid-item">3</div>
+            <div class="grid-item">2</div>
+            <div class="grid-item">1</div>
+            <div class="grid-item">0</div>
+        </div>
+    </div>
+
     <div class="parent">
-    <div class="mb-20">
-        <button onclick="moveTo.rotateFrontClock()"> Rotate Front Clock Wise </button>
-        <button onclick="moveTo.rotateFrontAntiClockWise()"> Rotate Front Anti Wise </button>
-    </div>
+        <div class="mb-20">
+            <button onclick="moveTo.rotateFrontClock()"> Rotate Front Clock Wise </button>
+            <button onclick="moveTo.rotateFrontAntiClockWise()"> Rotate Front Anti Wise </button>
+        </div>
 
-    <div class="mb-20">
-        <button onclick="moveTo.rotateBackClockWise()"> Rotate Back Clock Wise </button>
-        <button onclick="moveTo.rotateBackAntiClockWise()"> Rotate Back Anti Clock Wise </button>
-    </div>
+        <div class="mb-20">
+            <button onclick="moveTo.rotateBackClockWise()"> Rotate Back Clock Wise </button>
+            <button onclick="moveTo.rotateBackAntiClockWise()"> Rotate Back Anti Clock Wise </button>
+        </div>
 
-    <div class="mb-20">
-        <button onclick="moveTo.rotateLeftClockWise()"> Rotate Left Clock Wise </button>
-        <button onclick="moveTo.rotateLeftAntiClockWise()"> Rotate Left Anti Clock Wise </button>
-    </div>
+        <div class="mb-20">
+            <button onclick="moveTo.rotateLeftClockWise()"> Rotate Left Clock Wise </button>
+            <button onclick="moveTo.rotateLeftAntiClockWise()"> Rotate Left Anti Clock Wise </button>
+        </div>
 
-    <div class="mb-20">
-        <button onclick="moveTo.rotateRightClockWise()"> Rotate Right Clock Wise </button>
-        <button onclick="moveTo.rotateRightAntiClockWise()"> Rotate Right Anti Clock Wise </button>
-    </div>
+        <div class="mb-20">
+            <button onclick="moveTo.rotateRightClockWise()"> Rotate Right Clock Wise </button>
+            <button onclick="moveTo.rotateRightAntiClockWise()"> Rotate Right Anti Clock Wise </button>
+        </div>
 
-    <div class="mb-20">
-        <button onclick="moveTo.rotateTopClockWise()"> Rotate Top Clock Wise </button>
-        <button onclick="moveTo.rotateTopAntiClockWise()"> Rotate Top Anti Clock Wise </button>
-    </div>
+        <div class="mb-20">
+            <button onclick="moveTo.rotateTopClockWise()"> Rotate Top Clock Wise </button>
+            <button onclick="moveTo.rotateTopAntiClockWise()"> Rotate Top Anti Clock Wise </button>
+        </div>
 
-    <div class="mb-20">
-        <button onclick="moveTo.rotateBottomClockWise()"> Rotate Bottom Clock Wise </button>
-        <button onclick="moveTo.rotateBottomAntiClockWise()"> Rotate Bottom Anti Clock Wise</button>
+        <div class="mb-20">
+            <button onclick="moveTo.rotateBottomClockWise()"> Rotate Bottom Clock Wise </button>
+            <button onclick="moveTo.rotateBottomAntiClockWise()"> Rotate Bottom Anti Clock Wise</button>
+        </div>
     </div>
-</div>
 </body>
+<script>
+    let cubicValues = [
+        ["Orange-0-Front", "Orange-1-Front", "Orange-2-Front", "Orange-3-Front", "Orange-4-Front", "Orange-5-Front", "Orange-6-Front", "Orange-7-Front", "Orange-8-Front"],// orange-front
+        ["Blue-0-Top", "Blue-1-Top", "Blue-2-Top", "Blue-3-Top", "Blue-4-Top", "Blue-5-Top", "Blue-6-Top", "Blue-7-Top", "Blue-8-Top"], // blue-top
+        ["White-0-Right", "White-1-Right", "White-2-Right", "White-3-Right", "White-4-Right", "White-5-Right", "White-6-Right", "White-7-Right", "White-8-Right"],// white-right
+        ["Red-0-Back", "Red-1-Back", "Red-2-Back", "Red-3-Back", "Red-4-Back", "Red-5-Back", "Red-6-Back", "Red-7-Back", "Red-8-Back"],// red-black
+        ["Yellow-0-Left", "Yellow-1-Left", "Yellow-2-Left", "Yellow-3-Left", "Yellow-4-Left", "Yellow-5-Left", "Yellow-6-Left", "Yellow-7-Left", "Yellow-8-Left"],// yellow-left
+        ["Green-0-Bottom", "Green-1-Bottom", "Green-2-Bottom", "Green-3-Bottom", "Green-4-Bottom", "Green-5-Bottom", "Green-6-Bottom", "Green-7-Bottom", "Green-8-Bottom"] //green-bottom
+    ];
+
+    let moveTo = new SetMoves(cubicValues);
+    let updatedValues = moveTo.getUpdatedCubicValues();
+ 
+    if (updatedValues.length) {
+        for (i = 0; i <= 5; i++) {
+            for (j = 8; j >= 0; j--) {
+                // console.log(i, 'i', j, 'j', 'Here!!!', { item: updatedValues });
+                if (updatedValues[i] && updatedValues[i][j]) {
+                    let strItem = updatedValues[i][j];
+                    let splitItems = strItem.split('-');
+
+                    let currentColor = splitItems[0];
+                    let currentIndex = splitItems[1];
+                    let currentId = splitItems[2];
+
+                    let fixedId = 'Front';
+                    if (i == 0) {
+                        fixedId = 'Front';
+                    }
+
+                    if (i == 1) {
+                        fixedId = 'Top';
+                    }
+
+                    if (i == 2) {
+                        fixedId = 'Right';
+                    }
+
+                    if (i == 3) {
+                        fixedId = 'Back';
+                    }
+
+                    if (i == 4) {
+                        fixedId = 'Left';
+                    }
+
+                    if (i == 5) {
+                        fixedId = 'Bottom';
+                    }
+
+                    let currentItemById = document.getElementById(fixedId);
+                    let selectedItem = currentItemById.children[parseInt(currentIndex)];
+                    selectedItem.style.backgroundColor = currentColor;
+                }
+            }
+        }
+    }
+</script>
 
 </html>
